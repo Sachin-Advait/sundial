@@ -41,9 +41,9 @@ class Pages {
 
       case Routes.DASHBOARD:
         return _buildRoutes(
-          Provider(
+          ChangeNotifierProvider(
             create: (_) => getIt.get<DashboardProvider>(),
-            child: const DashboardView(),
+            child: DashboardView(),
           ),
 
           settings: settings,

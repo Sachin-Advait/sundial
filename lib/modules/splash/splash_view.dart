@@ -21,7 +21,9 @@ class _SplashViewState extends State<SplashView> {
   }
 
   void _checkAuthStateAndNavigate() {
-    GlobalKeys.navigatorKey.currentState!.pushReplacementNamed(Routes.LOGIN);
+    GlobalKeys.navigatorKey.currentState!.pushReplacementNamed(
+      Routes.DASHBOARD,
+    );
     // Check if user is authenticated
     // If authenticated, navigate to home
     // else navigate to login
