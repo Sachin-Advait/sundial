@@ -10,6 +10,10 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
+  flutter_easyloading: ^3.0.5
+  flutter_screenutil: ^5.9.3
+  provider: ^6.1.2
+  get_it: ^8.0.3
 
 dev_dependencies:
   flutter_test:
