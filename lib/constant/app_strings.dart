@@ -1,3 +1,3 @@
 class AppStrings {
-  static const String appTitle = "Sun Dial";
+  static const String appTitle = "Sundial";
 }
