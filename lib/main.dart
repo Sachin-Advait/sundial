@@ -12,7 +12,24 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   getItSetup();
+  configLoading();
   runApp(const MyApp());
+}
+
+void configLoading() {
+  EasyLoading.instance
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..loadingStyle = EasyLoadingStyle.custom
+    ..backgroundColor = Colors.white
+    ..indicatorColor = Colors.blueAccent
+    ..progressColor = Colors.blueAccent
+    ..textColor = Colors.black87
+    ..maskColor = Colors.white70
+    ..userInteractions = true
+    ..dismissOnTap = true
+    ..radius = 12.0
+    ..indicatorSize = 50.0
+    ..animationDuration = const Duration(milliseconds: 300);
 }
 
 class MyApp extends StatelessWidget {
@@ -30,21 +47,7 @@ class MyApp extends StatelessWidget {
                 navigatorKey: GlobalKeys.navigatorKey,
                 title: AppStrings.appTitle,
                 debugShowCheckedModeBanner: false,
-                builder: (context, widget) {
-                  EasyLoading.instance
-                    ..indicatorType = EasyLoadingIndicatorType.doubleBounce
-                    ..loadingStyle = EasyLoadingStyle.light
-                    ..indicatorSize = 45.0
-                    ..radius = 10.0
-                    ..progressColor = Colors.yellow
-                    ..backgroundColor = Colors.green
-                    ..indicatorColor = Colors.yellow
-                    ..textColor = Colors.yellow
-                    ..userInteractions = false
-                    ..dismissOnTap = false;
-
-                  return EasyLoading.init()(context, widget);
-                },
+                builder: EasyLoading.init(),
                 initialRoute: Pages.getInitialRoute(),
                 onGenerateRoute: Pages.onGenerateRoute,
               );
