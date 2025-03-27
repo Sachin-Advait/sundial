@@ -1,35 +1,34 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import '../../../models/temprature_details_model.dart';
+import '../../../models/weather_history_details_response.dart';
 
 class TemperatureChartView extends StatelessWidget {
-  const TemperatureChartView({
-    super.key,
-    required this.tempratureData,
-    required this.allDaysMaxTemp,
-    required this.allDaysMinTemp,
-  });
+  const TemperatureChartView({super.key, required this.dateTempratureDetails});
 
-  final List<TempratureDetailsModel> tempratureData;
-  final double allDaysMaxTemp, allDaysMinTemp;
-
-  List<FlSpot> _getMaxTempSpots() {
-    return List.generate(
-      tempratureData.length,
-      (i) => FlSpot(i.toDouble(), tempratureData[i].maxTemp),
-    );
-  }
-
-  List<FlSpot> _getMinTempSpots() {
-    return List.generate(
-      tempratureData.length,
-      (i) => FlSpot(i.toDouble(), tempratureData[i].minTemp),
-    );
-  }
+  final List<DateAndTempratureDetails> dateTempratureDetails;
 
   @override
   Widget build(BuildContext context) {
+    double allDaysMaxTemp = double.negativeInfinity;
+    double allDaysMinTemp = double.infinity;
+
+    List<FlSpot> maxTempSpots = [];
+    List<FlSpot> minTempSpots = [];
+
+    for (int i = 0; i < dateTempratureDetails.length; i++) {
+      if (dateTempratureDetails[i].maxTemp > allDaysMaxTemp) {
+        allDaysMaxTemp = dateTempratureDetails[i].maxTemp;
+      }
+
+      if (dateTempratureDetails[i].minTemp < allDaysMinTemp) {
+        allDaysMinTemp = dateTempratureDetails[i].minTemp;
+      }
+
+      maxTempSpots.add(FlSpot(i.toDouble(), dateTempratureDetails[i].maxTemp));
+      minTempSpots.add(FlSpot(i.toDouble(), dateTempratureDetails[i].minTemp));
+    }
+
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
@@ -97,7 +96,7 @@ class TemperatureChartView extends StatelessWidget {
                                 padding: const EdgeInsets.only(top: 8.0),
                                 child: Text(
                                   DateFormat.E().format(
-                                    tempratureData[value.toInt()].dateTime,
+                                    dateTempratureDetails[value.toInt()].date,
                                   ),
                                   style: const TextStyle(
                                     color: Colors.black54,
@@ -118,15 +117,17 @@ class TemperatureChartView extends StatelessWidget {
                       ),
                       borderData: FlBorderData(show: false),
                       minX: 0,
-                      maxX: tempratureData.length.toDouble() - 1,
-                      minY:
-                          allDaysMinTemp % 2 == 0
-                              ? allDaysMinTemp - 4
-                              : allDaysMinTemp - 5,
-                      maxY:
-                          allDaysMaxTemp % 2 == 0
-                              ? allDaysMaxTemp + 4
-                              : allDaysMaxTemp + 5,
+                      maxX: dateTempratureDetails.length.toDouble() - 1,
+                      minY: double.parse(
+                        allDaysMinTemp % 2 == 0
+                            ? (allDaysMinTemp - 2).toStringAsFixed(0)
+                            : (allDaysMinTemp - 3).toStringAsFixed(0),
+                      ),
+                      maxY: double.parse(
+                        allDaysMaxTemp % 2 == 0
+                            ? (allDaysMaxTemp + 2).toStringAsFixed(0)
+                            : (allDaysMaxTemp + 3).toStringAsFixed(0),
+                      ),
 
                       // Line Touch Data Tooltip.
                       lineTouchData: LineTouchData(
@@ -149,7 +150,7 @@ class TemperatureChartView extends StatelessWidget {
                       lineBarsData: [
                         // Max Temperature Line
                         LineChartBarData(
-                          spots: _getMaxTempSpots(),
+                          spots: maxTempSpots,
                           isCurved: true,
                           color: Colors.redAccent,
                           barWidth: 4,
@@ -170,7 +171,7 @@ class TemperatureChartView extends StatelessWidget {
 
                         // Min Temperature Line
                         LineChartBarData(
-                          spots: _getMinTempSpots(),
+                          spots: minTempSpots,
                           isCurved: true,
                           color: Colors.blueAccent,
                           barWidth: 4,

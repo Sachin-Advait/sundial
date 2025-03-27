@@ -3,6 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import '../../source/remote/api_client.dart';
+import '../../models/weather_history_details_response.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class HomeProvider with ChangeNotifier {
   final ApiClient _apiClient;
@@ -12,7 +14,11 @@ class HomeProvider with ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
+  List<DateAndTempratureDetails> _dateTempDetails = [];
+  List<DateAndTempratureDetails> get dateTempDetails => _dateTempDetails;
+
   Future<void> getLastSevenDaysWeatherHistory() async {
+    EasyLoading.show(status: 'loading...');
     _isLoading = true;
     notifyListeners();
 
@@ -26,12 +32,19 @@ class HomeProvider with ChangeNotifier {
       };
       final response = await _apiClient.getWeatherHistory(queryParameters);
 
-      if (response.statusCode == HttpStatus.ok) {
+      if (response.statusCode == HttpStatus.ok && response.data != null) {
+        _dateTempDetails =
+            WeatherHistoryDetailsResponse.fromJson(
+              response.data!,
+            ).forecast?.dayAndTempratureDetails ??
+            [];
+        _isLoading = false;
         notifyListeners();
       }
     } on DioException catch (error) {
       debugPrint('Error: ${error.message}');
     } finally {
+      EasyLoading.dismiss();
       _isLoading = false;
       notifyListeners();
     }
