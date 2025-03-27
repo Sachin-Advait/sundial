@@ -2,10 +2,12 @@
 
 class ApiConstants {
   // API BASE URL..
-  static const String BASE_URL = 'http://demo.sachin.com/index.php/v3_6/';
+  static const String BASE_URL = 'https://weatherapi-com.p.rapidapi.com/';
 
   // API ENDPOINTS..
+  static const String WEATHER_HISTORY = 'history.json';
 
-  // Auth APIs
-  static const String LOGIN = 'auth/login';
+  static const String API_KEY =
+      '0a33ad1420msh81fdc4a1f195cb3p161282jsn1a483952e8ba';
+  static const String API_HOST = 'weatherapi-com.p.rapidapi.com';
 }

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../modules/dashboard/dashboard_provider.dart';
 import 'package:sundial/modules/login/login_view.dart';
+import '../modules/home/home_provider.dart';
 import 'package:sundial/modules/splash/splash_view.dart';
-import 'package:sundial/modules/login/login_provider.dart';
 import 'package:sundial/modules/dashboard/dashboard_view.dart';
 
 class Pages {
@@ -31,18 +31,17 @@ class Pages {
         return _buildRoutes(const SplashView(), settings: settings);
 
       case Routes.LOGIN:
-        return _buildRoutes(
-          Provider(
-            create: (_) => getIt.get<LoginProvider>(),
-            child: const LoginView(),
-          ),
-          settings: settings,
-        );
+        return _buildRoutes(const LoginView(), settings: settings);
 
       case Routes.DASHBOARD:
         return _buildRoutes(
-          ChangeNotifierProvider(
-            create: (_) => getIt.get<DashboardProvider>(),
+          MultiProvider(
+            providers: [
+              ChangeNotifierProvider(
+                create: (_) => getIt.get<DashboardProvider>(),
+              ),
+              ChangeNotifierProvider(create: (_) => getIt.get<HomeProvider>()),
+            ],
             child: DashboardView(),
           ),
 
