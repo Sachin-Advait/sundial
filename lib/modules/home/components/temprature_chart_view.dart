@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -43,11 +44,11 @@ class TemperatureChartView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 8),
               child: Text(
                 "Max & Min Temperatures (°C)",
-                style: TextStyle(
+                style: GoogleFonts.bonaNova(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                   color: Colors.black87,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sundial/routes/routes.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sundial/utils/global_keys.dart';
 
 class ProfileView extends StatelessWidget {
@@ -48,8 +49,9 @@ class ProfileView extends StatelessWidget {
                       children: [
                         Text(
                           "Sachin", // Replace with dynamic name
-                          style: const TextStyle(
-                            fontSize: 18,
+
+                          style: GoogleFonts.bonaNova(
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
                           ),
@@ -57,9 +59,10 @@ class ProfileView extends StatelessWidget {
                         const SizedBox(height: 4),
                         Text(
                           "xccss@example.com", // Replace with dynamic email
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.black54,
+
+                          style: GoogleFonts.bonaNova(
+                            fontSize: 18,
+                            color: Colors.black87,
                           ),
                         ),
                       ],
