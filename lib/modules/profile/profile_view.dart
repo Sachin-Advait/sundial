@@ -2,15 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:sundial/routes/routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sundial/utils/global_keys.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
-  void _logout() {
-    GlobalKeys.navigatorKey.currentState!.pushNamedAndRemoveUntil(
-      Routes.LOGIN,
-      (_) => false,
-    );
+  void _logout() async {
+    try {
+      EasyLoading.show(status: 'Logging out...');
+      if (FirebaseAuth.instance.currentUser != null) {
+        await FirebaseAuth.instance.signOut();
+      }
+
+      GoogleSignIn googleSignIn = GoogleSignIn();
+      if (await googleSignIn.isSignedIn()) {
+        await googleSignIn.signOut();
+      }
+
+      GlobalKeys.navigatorKey.currentState!.pushNamedAndRemoveUntil(
+        Routes.LOGIN,
+        (_) => false,
+      );
+    } catch (e) {
+      debugPrint("Logout Error: $e");
+    } finally {
+      EasyLoading.dismiss();
+    }
   }
 
   @override

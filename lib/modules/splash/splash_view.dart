@@ -3,6 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:sundial/utils/global_keys.dart';
 import 'package:sundial/constant/app_assets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -14,19 +15,18 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    Future.delayed(
-      const Duration(seconds: 2),
-    ).then((_) => _checkAuthStateAndNavigate());
+    _checkAuthStateAndNavigate();
     super.initState();
   }
 
-  void _checkAuthStateAndNavigate() {
+  Future<void> _checkAuthStateAndNavigate() async {
+    await Future.delayed(Duration(seconds: 2));
+
+    User? user = FirebaseAuth.instance.currentUser;
+
     GlobalKeys.navigatorKey.currentState!.pushReplacementNamed(
-      Routes.DASHBOARD,
+      user == null ? Routes.LOGIN : Routes.DASHBOARD,
     );
-    // Check if user is authenticated
-    // If authenticated, navigate to home
-    // else navigate to login
   }
 
   @override
