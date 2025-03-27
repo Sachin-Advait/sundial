@@ -43,6 +43,7 @@ class HomeProvider with ChangeNotifier {
       }
     } on DioException catch (error) {
       debugPrint('Error: ${error.message}');
+      EasyLoading.showError(error.message ?? 'Something went wrong');
     } finally {
       EasyLoading.dismiss();
       _isLoading = false;
