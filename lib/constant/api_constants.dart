@@ -8,6 +8,9 @@ class ApiConstants {
   static const String WEATHER_HISTORY = 'history.json';
 
   static const String API_KEY =
-      '0a33ad1420msh81fdc4a1f195cb3p161282jsn1a483952e8ba';
+      // Sachin's API key
+      // '0a33ad1420msh81fdc4a1f195cb3p161282jsn1a483952e8ba';
+      // Below Ravi's API key
+      '373ffbfe10mshc51810f30d27ad4p15cae4jsn72753dea98fa';
   static const String API_HOST = 'weatherapi-com.p.rapidapi.com';
 }
