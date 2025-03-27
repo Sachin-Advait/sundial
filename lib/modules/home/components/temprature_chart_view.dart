@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import '../../../models/temprature_details_model.dart';
 
 class TemperatureChartView extends StatelessWidget {
   const TemperatureChartView({
@@ -10,7 +11,7 @@ class TemperatureChartView extends StatelessWidget {
     required this.allDaysMinTemp,
   });
 
-  final List<TempratureModel> tempratureData;
+  final List<TempratureDetailsModel> tempratureData;
   final double allDaysMaxTemp, allDaysMinTemp;
 
   List<FlSpot> _getMaxTempSpots() {
@@ -198,16 +199,4 @@ class TemperatureChartView extends StatelessWidget {
       ),
     );
   }
-}
-
-class TempratureModel {
-  final DateTime dateTime;
-  final double maxTemp;
-  final double minTemp;
-
-  TempratureModel({
-    required this.dateTime,
-    required this.maxTemp,
-    required this.minTemp,
-  });
 }
