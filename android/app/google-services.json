@@ -12,7 +12,20 @@
           "package_name": "com.sanoj.sundial"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "801160719265-dk3outjjnsv520dl40ee8q2ri47pcm22.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sanoj.sundial",
+            "certificate_hash": "7985501806fcb668f9bd1c0a02e4de5b816e28cc"
+          }
+        },
+        {
+          "client_id": "801160719265-oc63hc34f163s3vo3evrfa59hp7qd0f0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAMClyJFm5ReotW8kWYLgh0N3gaI95Fxtk"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "801160719265-oc63hc34f163s3vo3evrfa59hp7qd0f0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "801160719265-ou0rirmev5nk3j5emdvr846t4qsejp0j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sanoj.sundial"
+              }
+            }
+          ]
         }
       }
     }

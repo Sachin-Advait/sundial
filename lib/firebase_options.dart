@@ -63,6 +63,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '801160719265',
     projectId: 'sundial-827d8',
     storageBucket: 'sundial-827d8.firebasestorage.app',
+    androidClientId: '801160719265-dk3outjjnsv520dl40ee8q2ri47pcm22.apps.googleusercontent.com',
+    iosClientId: '801160719265-ou0rirmev5nk3j5emdvr846t4qsejp0j.apps.googleusercontent.com',
     iosBundleId: 'com.sanoj.sundial',
   );
+
 }
