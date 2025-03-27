@@ -7,12 +7,13 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+  ProfileView({super.key});
+  final _currentUser = FirebaseAuth.instance.currentUser;
 
   void _logout() async {
     try {
       EasyLoading.show(status: 'Logging out...');
-      if (FirebaseAuth.instance.currentUser != null) {
+      if (_currentUser != null) {
         await FirebaseAuth.instance.signOut();
       }
 
@@ -38,6 +39,7 @@ class ProfileView extends StatelessWidget {
       appBar: AppBar(
         title: Text('My Profile'),
         automaticallyImplyLeading: false,
+        centerTitle: true,
       ),
       body: Center(
         child: Padding(
@@ -67,8 +69,7 @@ class ProfileView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Sachin", // Replace with dynamic name
-
+                          _currentUser?.displayName ?? 'NA',
                           style: GoogleFonts.bonaNova(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -77,8 +78,7 @@ class ProfileView extends StatelessWidget {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          "xccss@example.com", // Replace with dynamic email
-
+                          _currentUser?.email ?? 'NA',
                           style: GoogleFonts.bonaNova(
                             fontSize: 18,
                             color: Colors.black87,

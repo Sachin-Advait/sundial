@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 class DashboardView extends StatelessWidget {
   DashboardView({super.key});
 
-  final List<Widget> _screens = [const HomeView(), const ProfileView()];
+  final List<Widget> _screens = [const HomeView(), ProfileView()];
 
   @override
   Widget build(BuildContext context) {

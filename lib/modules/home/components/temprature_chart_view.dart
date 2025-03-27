@@ -38,6 +38,7 @@ class TemperatureChartView extends StatelessWidget {
         elevation: 2,
         foregroundColor: Colors.black,
         automaticallyImplyLeading: false,
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
